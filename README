@@ -4,6 +4,8 @@ Sample usage:
       master => "flume-master.example.com",
       source => "syslogTcp( 35852 )",
       sink   => "agentE2EChain( \"collector1.example.com:35853\" )",
+      map    => "${hostname}-map",
+      flow   => 'flow01',
       ensure => insync,
     }
 
@@ -15,3 +17,15 @@ Or using multiple collectors:
       sink   => "agentE2EChain" => [ "flume1.example.com:35853", "flume2.example.com:35853" ] )",
       ensure => insync,
     }
+
+To unconfig a node:
+    flume_node { $fqdn:
+      master => "flume-master.example.com",
+      source => "syslogTcp( 35852 )",
+      sink   => "agentE2EChain( \"collector1.example.com:35853\" )",
+      map    => "${hostname}-map",
+      flow   => 'flow01',
+      ensure => outofsync,
+    }
+
+
